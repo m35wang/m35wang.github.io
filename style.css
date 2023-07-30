@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap");
+
+h1 {
+    font-family: 'Hind', 'sans-serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 64px;
+    color:#000000;
+}
+
+h2 {
+    font-family: 'Hind';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 48px;
+    color: #000000;
+}
+
+h3 {
+    font-family: 'Hind';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 40px;
+    color: #000000;
+}
+
+h4 {
+    font-family: 'Hind';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 36px;
+    color: #000000;
+}
+
+h5 {
+    font-family: 'Hind';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 32px;
+    color: #000000;
+    margin: 0%;
+}
+
+p {
+    font-family: 'Hind';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 29px;
+    color: #000000;
+    margin: 0%;
+}
+
+/* html {
+    display: grid;
+    grid-template-columns: repeat(127, 10px);
+    grid-template-rows: repeat(100, 10px);
+} */
+
+header {
+    display: grid;
+    grid-template-columns: repeat(127, 10px);
+    grid-template-rows: repeat(19, 10px);
+}
+
+.homeButton {
+    grid-column: 6/20;
+    grid-row: 6/13;
+}

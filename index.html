@@ -6,25 +6,39 @@
         <meta charset="utf-8"/>
     </head>
 
-    <header>
-        <div class="homeButton">
-             <a href="file:///C:/Users/maggi/Documents/Portfolio/index.html"></a><img src="Home_Button.png" alt="Home Button"/></a>
-        </div>
-        
-    </header>
-
     <body>
-        <div>
-            <h2>Heading 1</h2>
-            <h3>Heading 2</h3>
-            <h4>Heading 3</h4>
-            <h5>Normal Text</h5>
-            <p>Body text<p>
+        <header>
+            <nav class="with-border">
+                <div style="grid-row-start: 0; grid-column-start: 0;">
+                    <a class="home" href="file:///C:/Users/maggi/Documents/Portfolio/index.html">MW</a>
+                </div>
+                <div style="grid-row-start: 6; grid-column-start: 2;">
+                    <a class="navigation" id="about" href="file:///C:/Users/maggi/Documents/Portfolio/about.html">About Me</a>
+                    <a class="navigation" id="project" href="">Projects</a>
+                    <a class="navigation" id="food" href="">Food Corner</a>
+                </div>
+            </nav>
+        </header>
+        
+        <main class="with-border">
+            <div style="grid-row-start: 4; grid-column-start: 1;">
+                <h1>Hello! I'm <b>Maggie</b></h1>
+                <h1>Welcome to my corner</h1>
+                <p>I am a biomedical engineering student that has<br>a strong interest in robotics and happy food<br>enthusiast.</p>
+                <a href=""><button id="resume-button">Resume</button></a>
+            </div>
+            <div style="grid-row-start: 2; grid-column-start: 2;">
+                <img id="homepageimage" src="homepage_imag.JPG">
+            </div>
+        </main>
 
-        </div>
+        <footer class="with-border">
+            <div style="grid-row-start: 6; grid-column-start: 2;">
+                <hr>
+            </div>
+            
+        </footer>      
     </body>
 
-    <footer>
-
-    </footer>
+    
 </html>

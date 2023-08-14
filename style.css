@@ -7,7 +7,7 @@
     --yellow: #FFF791;
     --blue: #B0DBE4;
     --fs-25: 25px;
-    --fs-14: 15px;
+    --fs-15: 15px;
     --fs-20: 20px;
     --fs-32: 32px;
     --fs-36: 36px;
@@ -61,7 +61,7 @@ footer {
 }
 
 #copyright {
-    font-size: var(--fs-14);
+    font-size: var(--fs-15);
     opacity: 70%;
 }
 

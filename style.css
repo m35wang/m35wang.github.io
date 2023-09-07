@@ -6,6 +6,9 @@
     --green: #BCE4A4;
     --yellow: #FFF791;
     --blue: #B0DBE4;
+    --beige: #eeeeee;
+
+
     --fs-25: 25px;
     --fs-15: 15px;
     --fs-20: 20px;
@@ -37,10 +40,45 @@ nav {
     grid-template-columns: 66.7% 33.3%;
 }
 
-main {
+/* main layout grids */
+#homepage {
     display: grid;
     grid-template-rows: repeat(10, 5rem);
-    grid-template-columns: 66.7% 33.3%;
+    grid-template-columns: 66.7% 33.3%; 
+}
+
+#projects {
+    display: grid;
+    grid-template-rows: repeat(20, 5rem);
+    grid-template-columns: 15% 70% 15%;
+}
+
+/* projects */
+.project-layout {
+    display:grid;
+    align-items:center;
+    grid-template-columns: 5% 50% 45%;
+}
+
+#project1 {
+    grid-row: 1/7;
+    grid-column-start: 2;
+    background-color: var(--beige);
+    margin: 1rem;
+}
+
+#project2 {
+    grid-row: 7/13;
+    grid-column-start: 2;
+    background-color: var(--green);
+    margin: 1rem;
+}
+
+#project3 {
+    grid-row: 13/19;
+    grid-column-start: 2;
+    background-color: var(--beige);
+    margin: 1rem;
 }
 
 footer {

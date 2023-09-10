@@ -47,6 +47,12 @@ nav {
     grid-template-columns: 66.7% 33.3%; 
 }
 
+#aboutpage {
+    display: grid;
+    grid-template-rows: repeat(10, 5rem);
+    grid-template-columns: 40% 60%;
+}
+
 #projects {
     display: grid;
     grid-template-rows: repeat(20, 5rem);

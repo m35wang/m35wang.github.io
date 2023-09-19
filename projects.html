@@ -4,7 +4,6 @@
     <head>
         <link rel="stylesheet" href="style.css"/>
         <meta charset="utf-8"/>
-        <script src="slideshow.js"></script>
     </head>
 
     <body>
@@ -22,37 +21,29 @@
         </header>
         <main class="with-border" id="projects">
             <!-- project1 -->
-            <div id="project1">
-                <div class="fade_slides">
-                     <div id="project-layout" style="width: 100%; height: 100%;">
-                        <img src="img/hydraulic_system.jpg" style="grid-column:2/3; max-height:25rem;">
-                        <h3 style="grid-column-start: 3;">🌊Hydraulic System<p>A hydraulic end effector gripping system.</p></h3>
-                    </div>
-                </div>
-
-                <div class="fade_slides">
-                    <div id="project-layout" style="width: 100%; height: 100%;">
-                        <img src="img/homepage_imag.png" style="grid-column:2/3; max-height:25rem;">
-                        <h3 style="grid-column-start: 3;">🌊Hydraulic System<p>A hydraulic end effector gripping system.</p></h3>
-                    </div>
-                </div>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <div class="project-layout" id="project1" href="hydraulic.html">
+                <img src="img/hydraulic_system.jpg" style="grid-column:2/3; max-height:25rem;">
+                <h3 class="project-txt-w">🌊Hydraulic System<p>A hydraulic end effector gripping system.</p></h3>
             </div>
-            <!-- project2
+            <!-- project2 -->
             <div class="project-layout" id="project2">
-                <img src="img/homepage_imag.png" style="grid-column:2/3; max-height:25rem;">
-                <h3 style="grid-column-start: 3;">Data Collection Script<p>Enter Desription</p></h3>
+                <img src="img/board_mount.png" style="grid-column:2/3; max-height:25rem;">
+                <h3 class="project-txt-g">🔩Board Mounts<p>PCB mounts ontop of battery module lid.</p></h3>
             </div>
-             project3 -->
-            <!-- <div class="project-layout" id="project3"> 
-                <img src="img/homepage_imag.png" style="grid-column:2/3; max-height:25rem;">
-                <h3 style="grid-column-start: 3;">Quoted<p>Enter Desription</p></h3>
+             <!-- project3 -->
+            <div class="project-layout" id="project3"> 
+                <img src="img/pikachu.jpg" style="grid-column:2/3; max-height:25rem;">
+                <h3 class="project-txt-w">🤖Pikachu<p>The autonomous robot.</p></h3>
+            </div>
+            <!-- project4 -->
+            <div class="project-layout" id="project4"> 
+                <img src="img/quoted.png" style="grid-column:2/3; max-height:25rem;">
+                <h3 class="project-txt-g">💻Quoted<p>Interactive website for memories.</p></h3>
             </div>
 
-            <div style="grid-row:19/20; grid-column-start: 2; background-color: rgba(195, 188, 188, 0.659); margin: 1rem">
+            <div style="grid-row:25/26; grid-column-start: 2; background-color: rgba(195, 188, 188, 0.659); margin: 1rem">
                 <p style="text-align: center;">More to come!</p>
-            </div> --> 
+            </div>
         </main>
         <footer class="with-border">
             <div style="grid-row-start: 6; grid-column: 2/5;">
@@ -73,5 +64,24 @@
             </div>
             <p id="copyright" style="grid-row-start: 25; grid-column: 3;">©MaggieWang2023</p>
         </footer>   
+        <script>
+            document.getElementById("project1").addEventListener("click", function() {
+              window.location.href = "hydraulic.html";
+            });
+
+            document.getElementById("project2").addEventListener("click", function() {
+              window.location.href = "board_mount.html";
+            });
+
+            document.getElementById("project3").addEventListener("click", function() {
+              window.location.href = "pikachu.html";
+            });
+
+            document.getElementById("project4").addEventListener("click", function() {
+              window.location.href = "https://github.com/m35wang/quoted-client";
+            });
+
+          </script>
     </body>
+
 </html>

@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { projects } from "./projects.js";
 import RhythmsDetails from "./RhythmsDetails.jsx";
 
+const resumeUrl = import.meta.env.BASE_URL + "Maggie_Wang_Resume.pdf";
+
 export default function App() {
   const [activeProject, setActiveProject] = useState(null);
   const opener = useRef(null);
@@ -32,7 +34,7 @@ export default function App() {
         </div>
         <header className="masthead">
           <a href="#top">maggie wang</a>
-          <span title="Résumé link pending">resume</span>
+          <a href={resumeUrl} target="_blank" rel="noopener noreferrer">resume</a>
         </header>
         <main>
           <Greeting />
@@ -89,10 +91,10 @@ function SocialLinks({ linkedInGlyph = "assets/2199c.svg" }) {
         <img src="assets/d9072.svg" alt="" />
         <img className="social-glyph" src="assets/b83eb.svg" alt="" />
       </a>
-      <span className="resume-icon" role="img" aria-label="Résumé" title="Résumé link pending">
+      <a className="resume-icon" href={resumeUrl} aria-label="Resume" target="_blank" rel="noopener noreferrer">
         <img src="assets/d9040.svg" alt="" />
         <img className="social-glyph" src="assets/f86b1.svg" alt="" />
-      </span>
+      </a>
     </div>
   );
 }
@@ -111,13 +113,12 @@ const galleryPhotos = [
 ];
 
 function PhotoStrip() {
-  const [paused, setPaused] = useState(false);
 
   return (
     <section className="photo-strip wrap" aria-labelledby="photo-strip-title">
       <h2 id="photo-strip-title">Are pictures worth a thousand words?</h2>
       <div className="photo-strip-window" id="photo-strip-window" tabIndex={0} aria-label="Photo strip">
-        <div className="photo-strip-track" data-paused={paused}>
+        <div className="photo-strip-track">
           {[false, true].map(duplicate => (
             <ul className={duplicate ? "photo-strip-copy duplicate" : "photo-strip-copy"} key={String(duplicate)} aria-hidden={duplicate || undefined}>
               {galleryPhotos.map(([file, alt, position]) => (
@@ -129,9 +130,6 @@ function PhotoStrip() {
           ))}
         </div>
       </div>
-      <button className="photo-strip-toggle" type="button" aria-controls="photo-strip-window" onClick={() => setPaused(value => !value)}>
-        {paused ? "Play photo slideshow" : "Pause photo slideshow"}
-      </button>
     </section>
   );
 }
@@ -154,11 +152,11 @@ const typeCharacterMs = 62;
 
 function Greeting() {
   const [typing, setTyping] = useState({ index: 0, length: greetingEndings[0].length, deleting: false });
-  const [paused, setPaused] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const [reducedMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const ending = greetingEndings[typing.index];
 
   useEffect(() => {
-    if (paused) return;
+    if (reducedMotion) return;
 
     const { index, length, deleting } = typing;
     const complete = length === ending.length;
@@ -177,19 +175,16 @@ function Greeting() {
     }, delay);
 
     return () => window.clearTimeout(timer);
-  }, [ending, paused, typing]);
+  }, [ending, reducedMotion, typing]);
 
   return (
     <section className="intro wrap" aria-labelledby="intro-title">
       <h1 id="intro-title" aria-label={`${greetingPrefix} ${greetingEndings[0]}`}>
         <span className="greeting-prefix" aria-hidden="true">{greetingPrefix}</span>
         <span className="greeting-ending" aria-hidden="true">
-          <span className={paused ? undefined : "typing-caret"}>{ending.slice(0, typing.length)}</span>
+          <span className={reducedMotion ? undefined : "typing-caret"}>{ending.slice(0, typing.length)}</span>
         </span>
       </h1>
-      <button className="greeting-toggle" type="button" onClick={() => setPaused(paused => !paused)}>
-        {paused ? "Play greeting rotation" : "Pause greeting rotation"}
-      </button>
     </section>
   );
 }

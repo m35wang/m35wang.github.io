@@ -1,8 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { projects } from "./projects.js";
 import RhythmsDetails from "./RhythmsDetails.jsx";
-
-const resumeUrl = import.meta.env.BASE_URL + "Maggie_Wang_Resume.pdf";
+import BatteryDisplayDetails from "./BatteryDisplayDetails.jsx";
+import WaterAttackDetails from "./WaterAttackDetails.jsx";
 
 export default function App() {
   const [activeProject, setActiveProject] = useState(null);
@@ -34,7 +34,7 @@ export default function App() {
         </div>
         <header className="masthead">
           <a href="#top">maggie wang</a>
-          <a href={resumeUrl} target="_blank" rel="noopener noreferrer">resume</a>
+          <span title="Résumé link pending">resume</span>
         </header>
         <main>
           <Greeting />
@@ -91,10 +91,10 @@ function SocialLinks({ linkedInGlyph = "assets/2199c.svg" }) {
         <img src="assets/d9072.svg" alt="" />
         <img className="social-glyph" src="assets/b83eb.svg" alt="" />
       </a>
-      <a className="resume-icon" href={resumeUrl} aria-label="Resume" target="_blank" rel="noopener noreferrer">
+      <span className="resume-icon" role="img" aria-label="Résumé" title="Résumé link pending">
         <img src="assets/d9040.svg" alt="" />
         <img className="social-glyph" src="assets/f86b1.svg" alt="" />
-      </a>
+      </span>
     </div>
   );
 }
@@ -113,12 +113,13 @@ const galleryPhotos = [
 ];
 
 function PhotoStrip() {
+  const [paused, setPaused] = useState(false);
 
   return (
     <section className="photo-strip wrap" aria-labelledby="photo-strip-title">
       <h2 id="photo-strip-title">Are pictures worth a thousand words?</h2>
       <div className="photo-strip-window" id="photo-strip-window" tabIndex={0} aria-label="Photo strip">
-        <div className="photo-strip-track">
+        <div className="photo-strip-track" data-paused={paused}>
           {[false, true].map(duplicate => (
             <ul className={duplicate ? "photo-strip-copy duplicate" : "photo-strip-copy"} key={String(duplicate)} aria-hidden={duplicate || undefined}>
               {galleryPhotos.map(([file, alt, position]) => (
@@ -130,6 +131,9 @@ function PhotoStrip() {
           ))}
         </div>
       </div>
+      <button className="photo-strip-toggle" type="button" aria-controls="photo-strip-window" onClick={() => setPaused(value => !value)}>
+        {paused ? "Play photo slideshow" : "Pause photo slideshow"}
+      </button>
     </section>
   );
 }
@@ -152,11 +156,11 @@ const typeCharacterMs = 62;
 
 function Greeting() {
   const [typing, setTyping] = useState({ index: 0, length: greetingEndings[0].length, deleting: false });
-  const [reducedMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const [paused, setPaused] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const ending = greetingEndings[typing.index];
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (paused) return;
 
     const { index, length, deleting } = typing;
     const complete = length === ending.length;
@@ -175,16 +179,19 @@ function Greeting() {
     }, delay);
 
     return () => window.clearTimeout(timer);
-  }, [ending, reducedMotion, typing]);
+  }, [ending, paused, typing]);
 
   return (
     <section className="intro wrap" aria-labelledby="intro-title">
       <h1 id="intro-title" aria-label={`${greetingPrefix} ${greetingEndings[0]}`}>
         <span className="greeting-prefix" aria-hidden="true">{greetingPrefix}</span>
         <span className="greeting-ending" aria-hidden="true">
-          <span className={reducedMotion ? undefined : "typing-caret"}>{ending.slice(0, typing.length)}</span>
+          <span className={paused ? undefined : "typing-caret"}>{ending.slice(0, typing.length)}</span>
         </span>
       </h1>
+      <button className="greeting-toggle" type="button" onClick={() => setPaused(paused => !paused)}>
+        {paused ? "Play greeting rotation" : "Pause greeting rotation"}
+      </button>
     </section>
   );
 }
@@ -242,7 +249,10 @@ function CarouselArrow() {
   );
 }
 
+const projectDetails = { 1: RhythmsDetails, 2: BatteryDisplayDetails, 3: WaterAttackDetails };
+
 function ProjectDialog({ project, onClose }) {
+  const Details = projectDetails[project?.id];
   const dialog = useRef(null);
   const content = useRef(null);
 
@@ -275,7 +285,7 @@ function ProjectDialog({ project, onClose }) {
             <Tags project={project} />
           </header>
           <div ref={content} className="dialog-scroll" tabIndex={0} role="region" aria-label="Project details">
-            {project.id === 1 ? <RhythmsDetails contact={<SocialLinks linkedInGlyph="assets/projects/0d46e.svg" />} /> : (
+            {Details ? <Details contact={<SocialLinks linkedInGlyph="assets/projects/0d46e.svg" />} /> : (
               <div className="dialog-coming-soon">
                 <p>Thanks for clicking in :)</p>
                 <p>More details coming soon!</p>

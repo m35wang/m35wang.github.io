@@ -50,6 +50,21 @@ a:hover, .view:hover, .back:hover, h3 button:hover { text-decoration: underline;
   width: 2px;
   background: currentColor;
 }
+.greeting-toggle {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 20px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.greeting-toggle:hover { background: var(--sage); }
 .projects { position: relative; isolation: isolate; padding-top: 62px; background: white; }
 .projects h2 { position: relative; font-size: 40px; margin-bottom: 60px; }
 .project-carousel {
@@ -154,6 +169,8 @@ h3 button, .view { border: 0; padding: 0; background: none; text-align: left; }
 .photo-strip-copy { display: flex; gap: var(--photo-gap); padding: 0 var(--photo-gap) 0 0; margin: 0; list-style: none; }
 .photo-strip-copy li { flex: 0 0 var(--photo-size); width: var(--photo-size); aspect-ratio: 1; background: var(--paper); }
 .photo-strip-copy img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.photo-strip-toggle { min-height: 44px; padding: 0 12px; border: 0; border-radius: 20px; background: transparent; color: var(--muted); font-size: 13px; }
+.photo-strip-toggle:hover { background: var(--sage); }
 .site-footer {
   --contact-icon-size: clamp(44px, calc(40px + 1.25vw), 57.6px);
   position: relative;
@@ -181,11 +198,13 @@ h3 button, .view { border: 0; padding: 0; background: none; text-align: left; }
 
 @media (prefers-reduced-motion: no-preference) {
   .photo-strip-track { animation: photo-strip-scroll 75s linear infinite; }
+  .photo-strip-track[data-paused="true"] { animation-play-state: paused; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .photo-strip-window { overflow-x: auto; }
-  .photo-strip-copy.duplicate,   .site-footer { padding-top: 24px; }
+  .photo-strip-copy.duplicate, .photo-strip-toggle { display: none; }
+  .site-footer { padding-top: 24px; }
 }
 
 @keyframes photo-strip-scroll {
@@ -245,6 +264,7 @@ dialog::backdrop { background: rgb(25 22 21 / 88%); }
 @media (max-width: 760px) {
   .masthead { padding-top: 23px; height: 72px; font-size: 20px; }
   .intro { min-height: clamp(230px, 52vw, 330px); }
+  .greeting-toggle { bottom: 8px; }
   .projects { padding-top: 30px; }
   .projects h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 24px; }
   .project-carousel { --card-width: calc(100vw - var(--gutter) * 2); }
@@ -339,3 +359,33 @@ dialog::backdrop { background: rgb(25 22 21 / 88%); }
   0%, 25% { transform: none; opacity: 1; }
   100% { transform: translateX(calc(-15% * var(--slide-direction))) scale(.98); opacity: 0; }
 }
+
+
+.frame-details { padding: 24px 24px 0; display: grid; gap: 36px; font-size: 18px; line-height: 1.45; }
+.detail-columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 34px; align-items: start; }
+.detail-stack { display: grid; gap: 24px; min-width: 0; }
+.frame-details .eyebrow { margin-bottom: 16px; }
+.frame-details ul { padding-left: 1.2em; margin: 0; }
+.frame-details p { margin: 0; }
+.frame-details p + p { margin-top: 18px; }
+.frame-details .detail-photo { display: block; width: 100%; height: auto; }
+.frame-details .battery-intro { width: min(100%, 264px); aspect-ratio: 264 / 352; object-fit: cover; }
+.battery-frame .detail-columns { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); }
+.battery-frame .detail-columns > .detail-stack:first-child { gap: 24px; }
+.battery-design-photos { margin-top: 52px; }
+.frame-details .board-v1 { aspect-ratio: 315 / 235; object-fit: cover; object-position: center 39%; }
+.frame-details .board-v2 { aspect-ratio: 315 / 204; object-fit: cover; object-position: center 35%; }
+.battery-product { width: 63%; margin: 0 auto; text-align: center; }
+.battery-product figcaption { margin-top: 6px; }
+.water-frame .detail-columns { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+.water-frame .detail-columns > .detail-stack:first-child > .detail-photo:nth-of-type(2) { aspect-ratio: 304 / 417; object-fit: cover; }
+@media (max-width: 600px) {
+ .frame-details { padding: 20px 0 0; font-size: 16px; gap: 28px; }
+ .frame-details .detail-columns { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+ .battery-design-photos { margin-top: 0; }
+ .frame-details .battery-intro { max-width: 264px; margin-inline: auto; }
+}
+
+.water-demo { width: 76%; margin: 0 auto; }
+
+.water-demo-video { display: block; width: 100%; height: auto; background: black; }
